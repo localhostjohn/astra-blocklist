@@ -1,0 +1,124 @@
+! Title: Astra Network Blocklist
+! Description: Conservative network-wide ad, tracker, telemetry, and nuisance-domain blocklist for AdGuard Home.
+! Maintainer: Astra Home Lab
+! Version: 1.0.0
+! Last updated: 2026-09-03
+! Format: AdGuard / Adblock-style DNS filtering rules
+!
+! IMPORTANT:
+! - This list intentionally avoids blocking core YouTube, Netflix, Sky, Apple, Microsoft, and major CDN domains.
+! - DNS filtering cannot reliably remove in-stream ads from YouTube, Netflix ad-tier, Sky, Twitch, and similar services.
+! - Add rules gradually and use AdGuard Home Query Log to investigate false positives.
+!
+! ============================================================
+! GENERAL ADVERTISING
+! ============================================================
+||doubleclick.net^
+||googlesyndication.com^
+||googleadservices.com^
+||adservice.google.com^
+||amazon-adsystem.com^
+||adnxs.com^
+||adsrvr.org^
+||advertising.com^
+||criteo.com^
+||criteo.net^
+||openx.net^
+||pubmatic.com^
+||rubiconproject.com^
+||smartadserver.com^
+||taboola.com^
+||outbrain.com^
+||zedo.com^
+
+! ============================================================
+! TRACKING / ANALYTICS
+! ============================================================
+||scorecardresearch.com^
+||quantserve.com^
+||hotjar.com^
+||mouseflow.com^
+||fullstory.com^
+||clarity.ms^
+||segment.io^
+||segment.com^
+||mixpanel.com^
+||amplitude.com^
+||branch.io^
+||adjust.com^
+||appsflyer.com^
+||kochava.com^
+||mathtag.com^
+||demdex.net^
+||bluekai.com^
+||krxd.net^
+||rlcdn.com^
+
+! ============================================================
+! MOBILE / APP ADVERTISING & TELEMETRY
+! ============================================================
+||unityads.unity3d.com^
+||ads.unity.com^
+||applovin.com^
+||applvn.com^
+||vungle.com^
+||chartboost.com^
+||inmobi.com^
+||startappservice.com^
+||supersonicads.com^
+||ironsrc.com^
+||tapjoy.com^
+||adcolony.com^
+
+! ============================================================
+! SMART TV / STREAMING TELEMETRY
+! Conservative only: avoids core playback/CDN domains.
+! ============================================================
+||conviva.com^
+||conviva.net^
+||newrelic.com^
+||bugsnag.com^
+||sentry.io^
+
+! ============================================================
+! NUISANCE / POPUNDER / RECOMMENDATION NETWORKS
+! ============================================================
+||mgid.com^
+||revcontent.com^
+||propellerads.com^
+||popads.net^
+||popcash.net^
+||exoclick.com^
+
+! ============================================================
+! OPTIONAL AGGRESSIVE RULES
+! Uncomment only if you specifically want to test them.
+! These may break site analytics, app functionality, sign-in,
+! recommendations, or embedded content.
+! ============================================================
+! ||google-analytics.com^
+! ||googletagmanager.com^
+! ||facebook.net^
+! ||connect.facebook.net^
+! ||bat.bing.com^
+! ||app-measurement.com^
+! ||firebaseinstallations.googleapis.com^
+
+! ============================================================
+! EXAMPLE ALLOWLIST RULES
+! Remove the leading "!" to activate if something breaks.
+! ============================================================
+! @@||example.com^
+! @@||subdomain.example.com^
+
+! ============================================================
+! LOCAL ASTRA NOTES
+! ============================================================
+! Recommended workflow:
+! 1. Keep AdGuard's default filter enabled.
+! 2. Add this Astra list.
+! 3. Watch Query Log -> Blocked.
+! 4. Test Windows, iPhone, Sky Glass, and other smart devices.
+! 5. If a service breaks, allowlist the minimum required domain.
+!
+! End of Astra Network Blocklist
