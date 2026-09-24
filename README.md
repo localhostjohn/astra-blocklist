@@ -6,9 +6,21 @@ A conservative, custom DNS-filtering list for my Astra home lab, designed for Ad
 
 The [`astra-blocklist.txt`](./astra-blocklist.txt) file contains AdGuard/Adblock-style domain rules. The list is intended to supplement, rather than replace, AdGuard Home's standard protection. It avoids deliberately blocking major streaming, operating-system and CDN services, although any DNS filter can still cause false positives.
 
-The file includes rules for advertising and tracking networks, optional rules that are disabled by default, and example allowlist syntax. The current list is a home-lab configuration, not a professionally validated threat-intelligence feed or a guarantee of malware protection.
+The default policy is **maximum safe blocking, minimum service disruption**. Streaming reliability takes priority over increasing the blocked-query percentage. Potentially disruptive streaming/app telemetry rules are kept disabled until they have been validated through AdGuard Home Query Log and repeatable service tests.
 
-## Add the list to AdGuard Home
+For the current compatibility-first filter stack and validation process, see [Streaming-safe AdGuard Home baseline](docs/streaming-safe-baseline.md).
+
+## Recommended baseline
+
+The initial Astra baseline is:
+
+- **HaGeZi Multi NORMAL** as the primary curated ad/tracker/telemetry list;
+- **HaGeZi TIF MINI** as a lightweight malware/phishing supplement;
+- **Astra Custom Blocklist** for conservative lab-specific rules.
+
+Only one HaGeZi Multi tier should be enabled at a time. More aggressive tiers and device-specific tracker lists are treated as later experiments rather than baseline dependencies.
+
+## Add the Astra list to AdGuard Home
 
 1. Open your own AdGuard Home administration interface.
 2. Go to **Filters → DNS blocklists** and choose **Add blocklist → Add a custom list**.
@@ -25,11 +37,13 @@ Do not expose your AdGuard administration interface publicly or publish its cred
 
 ## Troubleshooting and change control
 
-If a site or application stops working after a filter change, check **Query Log** for blocked requests around the time of the failure. Temporarily disable the custom list to determine whether it is responsible, then re-enable it and add the narrowest appropriate allowlist rule if necessary. Avoid broadly allowing entire services when a single domain is sufficient.
+If a site or application stops working after a filter change, check **Query Log** for blocked requests around the time of the failure. Temporarily disable the relevant list or unblock the narrowest suspected domain to determine whether filtering is responsible, then re-test the exact failed action.
+
+Avoid broadly allowing an entire vendor, streaming platform or CDN when a single confirmed domain is sufficient.
 
 For a new rule, document the reason for blocking, test it on the lab, and verify that it does not interfere with expected services. Keep changes small so they can be reviewed and reverted. A Git commit provides a useful record of what changed and why.
 
-DNS filtering cannot reliably remove in-stream advertising from services such as YouTube, and it does not replace browser security, endpoint protection, patching or network segmentation.
+DNS filtering cannot reliably remove in-stream advertising from services such as YouTube, Netflix, Prime Video and Sky where advertising can share delivery infrastructure with legitimate content. Browser- or application-level filtering can complement DNS where appropriate.
 
 ## Infrastructure skills demonstrated
 
@@ -37,6 +51,8 @@ DNS filtering cannot reliably remove in-stream advertising from services such as
 - Managing a service configuration as version-controlled text.
 - Troubleshooting false positives through logs and controlled changes.
 - Applying least-privilege principles to management access.
+- Maintaining a compatibility-first filtering baseline.
+- Service validation, rollback and evidence collection.
 - Maintaining documentation without publishing private network details.
 
 ## Status and limitations
@@ -48,6 +64,7 @@ This is an evolving personal lab project. The repository contains the blocklist 
 - [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome)
 - [AdGuard Home Wiki](https://github.com/AdguardTeam/AdGuardHome/wiki)
 - [AdGuard DNS filtering syntax](https://adguard-dns.io/kb/general/dns-filtering-syntax/)
+- [HaGeZi DNS Blocklists](https://github.com/hagezi/dns-blocklists)
 
 ---
 
