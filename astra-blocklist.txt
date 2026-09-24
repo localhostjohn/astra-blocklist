@@ -1,14 +1,18 @@
 ! Title: Astra Network Blocklist
 ! Description: Conservative network-wide ad, tracker, telemetry, and nuisance-domain blocklist for AdGuard Home.
 ! Maintainer: Astra Home Lab
-! Version: 1.0.0
-! Last updated: 2026-09-03
+! Version: 1.1.0
+! Last updated: 2026-09-24
 ! Format: AdGuard / Adblock-style DNS filtering rules
 !
-! IMPORTANT:
-! - This list intentionally avoids blocking core YouTube, Netflix, Sky, Apple, Microsoft, and major CDN domains.
-! - DNS filtering cannot reliably remove in-stream ads from YouTube, Netflix ad-tier, Sky, Twitch, and similar services.
-! - Add rules gradually and use AdGuard Home Query Log to investigate false positives.
+! POLICY:
+! - Maximum safe blocking, minimum service disruption.
+! - Streaming reliability takes priority over aggressive telemetry blocking.
+! - This list intentionally avoids blocking core YouTube, Netflix, Prime Video, Sky, Apple,
+!   Microsoft, authentication, and major CDN domains.
+! - DNS filtering cannot reliably remove in-stream ads from YouTube, Netflix ad-tier,
+!   Prime Video, Sky, Twitch, and similar services.
+! - Add or promote rules only after Query Log evidence and service validation.
 !
 ! ============================================================
 ! GENERAL ADVERTISING
@@ -55,7 +59,7 @@
 ||rlcdn.com^
 
 ! ============================================================
-! MOBILE / APP ADVERTISING & TELEMETRY
+! MOBILE / APP ADVERTISING
 ! ============================================================
 ||unityads.unity3d.com^
 ||ads.unity.com^
@@ -71,16 +75,6 @@
 ||adcolony.com^
 
 ! ============================================================
-! SMART TV / STREAMING TELEMETRY
-! Conservative only: avoids core playback/CDN domains.
-! ============================================================
-||conviva.com^
-||conviva.net^
-||newrelic.com^
-||bugsnag.com^
-||sentry.io^
-
-! ============================================================
 ! NUISANCE / POPUNDER / RECOMMENDATION NETWORKS
 ! ============================================================
 ||mgid.com^
@@ -91,10 +85,23 @@
 ||exoclick.com^
 
 ! ============================================================
+! OPTIONAL STREAMING / APP TELEMETRY TEST RULES
+! Disabled by default because these domains may be used by apps
+! for QoE, diagnostics, crash reporting, or service health.
+! Enable only one at a time after Query Log evidence, then test
+! Sky Glass, YouTube, Netflix and Prime Video before keeping it.
+! ============================================================
+! ||conviva.com^
+! ||conviva.net^
+! ||newrelic.com^
+! ||bugsnag.com^
+! ||sentry.io^
+
+! ============================================================
 ! OPTIONAL AGGRESSIVE RULES
 ! Uncomment only if you specifically want to test them.
 ! These may break site analytics, app functionality, sign-in,
-! recommendations, or embedded content.
+! recommendations, embedded content, or device features.
 ! ============================================================
 ! ||google-analytics.com^
 ! ||googletagmanager.com^
@@ -106,19 +113,20 @@
 
 ! ============================================================
 ! EXAMPLE ALLOWLIST RULES
-! Remove the leading "!" to activate if something breaks.
+! Activate only when a specific false positive is confirmed.
 ! ============================================================
 ! @@||example.com^
 ! @@||subdomain.example.com^
 
 ! ============================================================
-! LOCAL ASTRA NOTES
+! LOCAL ASTRA CHANGE WORKFLOW
 ! ============================================================
-! Recommended workflow:
-! 1. Keep AdGuard's default filter enabled.
-! 2. Add this Astra list.
-! 3. Watch Query Log -> Blocked.
-! 4. Test Windows, iPhone, Sky Glass, and other smart devices.
-! 5. If a service breaks, allowlist the minimum required domain.
+! 1. Keep a known-good baseline before changing filters.
+! 2. Use one primary curated list tier plus this Astra supplement.
+! 3. Watch AdGuard Home Query Log during each test.
+! 4. Test browsing, sign-in, Sky Glass, YouTube, Netflix and Prime Video.
+! 5. If a service breaks, identify the blocked domain from the Query Log.
+! 6. Allowlist only the narrowest confirmed domain.
+! 7. Re-test before recording the change as validated.
 !
 ! End of Astra Network Blocklist
